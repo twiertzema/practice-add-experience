@@ -1,13 +1,14 @@
+import { Dialog, DialogPanel } from "@headlessui/react";
 // App.tsx
 import { useState } from "react";
-import type { JobExperience } from "./types";
 import AddExperienceForm from "./components/AddExperienceForm";
 import { sampleJobExperiences } from "./sample-data";
+import type { JobExperience } from "./types";
 
 function App() {
   const [experienceList, setExperienceList] =
     useState<JobExperience[]>(sampleJobExperiences);
-  const [showAddExperienceForm, setShowAddExperienceForm] = useState(false);
+  const [showAddExperienceForm, setShowAddExperienceForm] = useState(true);
 
   return (
     <div className="bg-gray-300 min-h-screen p-4">
@@ -40,9 +41,12 @@ function App() {
             </p>
           </div>
         ))}
-        {showAddExperienceForm && (
+        <Dialog
+          open={showAddExperienceForm}
+          onClose={() => setShowAddExperienceForm(false)}
+        >
           <dialog className="fixed inset-0 bg-black/60 flex items-baseline pt-10 justify-center w-full h-full">
-            <div className="bg-white rounded shadow-lg container w-3xl">
+            <DialogPanel className="bg-white rounded shadow-lg container w-3xl">
               <AddExperienceForm
                 onSubmit={(newExperience) => {
                   setExperienceList((prev) => [newExperience, ...prev]);
@@ -52,9 +56,9 @@ function App() {
                   setShowAddExperienceForm(false);
                 }}
               />
-            </div>
+            </DialogPanel>
           </dialog>
-        )}
+        </Dialog>
       </div>
     </div>
   );
