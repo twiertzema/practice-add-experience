@@ -26,11 +26,21 @@ export default function AddExperienceForm({
       <div className="flex flex-col gap-4 p-4 text-gray-600">
         <p className="text-sm">* Indicates required</p>
 
-        <TextField label="Title" name="title" required />
+        <TextField
+          label="Title"
+          name="title"
+          placeholder="Ex: Retail Sales Manager"
+          required
+        />
 
         {/* TODO: SelectField */}
 
-        <TextField label="Company or Organization" name="company" required />
+        <TextField
+          label="Company or Organization"
+          name="company"
+          placeholder="Ex: Microsoft"
+          required
+        />
       </div>
 
       <div className="p-4 border-t-1 border-gray-300">TODO: Actions</div>

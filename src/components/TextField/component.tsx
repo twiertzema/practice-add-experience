@@ -1,22 +1,22 @@
-import { Field, Input, Label } from "@headlessui/react";
+import { Input } from "@headlessui/react";
+import Field, { type FieldProps } from "../Field";
 
-interface TextFieldsProps {
-  label: string;
+interface TextFieldsProps extends FieldProps {
   name: string;
-  required?: boolean;
+  placeholder?: string;
 }
 
-export default function TextField({ label, name, required }: TextFieldsProps) {
+export default function TextField({
+  name,
+  placeholder,
+  ...fieldProps
+}: TextFieldsProps) {
   return (
-    <Field className="w-full">
-      <Label>
-        {label}
-        {required ? "*" : ""}
-      </Label>
+    <Field {...fieldProps}>
       <Input
         className="block w-full border rounded px-2 py-1"
         name={name}
-        placeholder="Ex: Retail Sales Manager"
+        placeholder={placeholder}
       />
     </Field>
   );
