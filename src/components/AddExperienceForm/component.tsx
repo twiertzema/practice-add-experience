@@ -1,8 +1,10 @@
 import { Button, DialogTitle } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { type SyntheticEvent, useCallback } from "react";
 import type { JobExperience } from "../../types";
 import SelectField from "../SelectField";
 import TextField from "../TextField";
+import { EMPLOYMENT_TYPE_OPTIONS } from "./constants";
 
 interface AddExperienceFormProps {
   onCancel: () => void;
@@ -14,8 +16,16 @@ export default function AddExperienceForm({
   onSubmit,
   ...props
 }: AddExperienceFormProps) {
+  const handleSubmit = useCallback((e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    console.log(formData);
+  }, []);
+
   return (
-    <form {...props}>
+    <form {...props} onSubmit={handleSubmit}>
       <div className="flex justify-between p-4 border-b-1 border-gray-300">
         <DialogTitle className="text-lg font-bold">Add Experience</DialogTitle>
 
@@ -29,32 +39,15 @@ export default function AddExperienceForm({
 
         <TextField
           label="Title"
-          name="title"
+          name="job_title"
           placeholder="Ex: Retail Sales Manager"
           required
         />
 
         <SelectField
           label="Employment type"
-          name="type"
-          options={[
-            {
-              label: "Please select",
-              value: "",
-            },
-            {
-              label: "Full-time",
-              value: "full-time",
-            },
-            {
-              label: "Part-time",
-              value: "part-time",
-            },
-            {
-              label: "Contract",
-              value: "contract",
-            },
-          ]}
+          name="exployment_type"
+          options={EMPLOYMENT_TYPE_OPTIONS}
         />
 
         <TextField
@@ -65,7 +58,14 @@ export default function AddExperienceForm({
         />
       </div>
 
-      <div className="p-4 border-t-1 border-gray-300">TODO: Actions</div>
+      <div className="flex justify-end p-4 border-t-1 border-gray-300">
+        <Button
+          className="w-18 p-1 rounded-full bg-blue-700 text-white font-semibold"
+          type="submit"
+        >
+          Save
+        </Button>
+      </div>
     </form>
   );
 }
