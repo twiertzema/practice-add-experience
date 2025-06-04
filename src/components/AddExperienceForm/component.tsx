@@ -1,6 +1,7 @@
 import { Button, DialogTitle } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import type { JobExperience } from "../../types";
+import TextField from "../TextField";
 
 interface AddExperienceFormProps {
   onCancel: () => void;
@@ -22,9 +23,14 @@ export default function AddExperienceForm({
         </Button>
       </div>
 
-      <div className="p-4">
+      <div className="flex flex-col gap-4 p-4 text-gray-600">
         <p className="text-sm">* Indicates required</p>
-        TODO: Input fields
+
+        <TextField label="Title" name="title" required />
+
+        {/* TODO: SelectField */}
+
+        <TextField label="Company or Organization" name="company" required />
       </div>
 
       <div className="p-4 border-t-1 border-gray-300">TODO: Actions</div>
