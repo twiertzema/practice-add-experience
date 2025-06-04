@@ -1,6 +1,7 @@
 import { Button, DialogTitle } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import type { JobExperience } from "../../types";
+import SelectField from "../SelectField";
 import TextField from "../TextField";
 
 interface AddExperienceFormProps {
@@ -33,7 +34,28 @@ export default function AddExperienceForm({
           required
         />
 
-        {/* TODO: SelectField */}
+        <SelectField
+          label="Employment type"
+          name="type"
+          options={[
+            {
+              label: "Please select",
+              value: "",
+            },
+            {
+              label: "Full-time",
+              value: "full-time",
+            },
+            {
+              label: "Part-time",
+              value: "part-time",
+            },
+            {
+              label: "Contract",
+              value: "contract",
+            },
+          ]}
+        />
 
         <TextField
           label="Company or Organization"
